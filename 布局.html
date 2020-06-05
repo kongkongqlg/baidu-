@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .head{
+            height: 60px;
+            background-color: dimgrey;
+        }
+        .headcontent{
+            width: 960px;
+            margin: 0 auto;
+            color: white;
+        }
+        ul li{
+            display: inline-block;
+        }
+        ul li a{
+            color: white;
+        }
+        .banner{
+            height: 200px;
+            background-color: yellowgreen;
+            position: relative;
+        }
+        .banner ul li{
+            width: 18px;
+            color: black;
+            border: 1px solid black;
+            text-align: center;
+        }
+        .navmenu li{
+            float: left;
+            height: 35px;
+            line-height: 35px;
+            width: 100px;
+            text-align: center;
+            border: 1px solid gray;
+            border-radius: 5px;
+            
+        }
+        .flexbox div{
+            flex-grow: 1;
+            padding: 80px;
+            border: 1px solid lightgray;
+        }
+        .footer{
+            height: 50px;
+            padding-top: 5px;
+            text-align: center;
+            background-color: darkgray;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="head">
+            <div class="headcontent" style="position: relative;">
+                Logo
+                <ul style="position: absolute;top: 0;right: 0;">
+                    <li><a href="#">Github</a></li>
+                    <li><a href="#">register</a></li>
+                    <li><a href="#">Login</a></li>
+                    <br clear="both"/>
+                </ul>
+            </div>
+        </div>
+        <div class="banner">
+            <ul style="position: absolute;right: 100px; bottom: 10px;">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+        <div class="nav" style=" border-bottom:1px solid lightgray;">
+            <div style="position: relative;width: 960px;height:50px;margin: 0 auto;overflow: hidden;">
+            <ul class="navmenu" style="position: absolute;bottom: -2px;">
+                <li>HOME</li>
+                <li>PROFILE</li>
+                <li>ABOUT</li>
+            </ul>
+            </div>
+        </div>
+        <div class="content" style="padding-top: 5px;padding-bottom: 10px;">
+            <div class="contentbox" style="width: 960px; margin: 0 auto;">
+                <div class='flexbox' style="display: flex;flex-direction: row;padding-bottom: 5px;">
+                    <div>this is content1</div>
+                    <div>maybecontent2</div>
+                    <div>content3</div>
+                </div>
+                <div class="flexbox" style="display: flex;flex-direction: row;padding-bottom: 5px;">
+                    <div>content 4</div>
+                    <div>content5</div>
+                    <div>content6</div>
+                    <div>content7</div>
+                </div>
+                <div class="flexbox" style="display: flex;flex-direction: row;padding-bottom: 10px;">
+                    <div>content8</div>
+                    <div>content9</div>
+                    <div>content10</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><a href="#" style="color: lightcyan;">life.baidu.com</a></div>
+    </div>
+</body>
+</html>
