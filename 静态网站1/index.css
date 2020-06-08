@@ -1,0 +1,37 @@
+html,body{
+    height:100%;
+}
+body > div{
+    height: 100%;
+}
+.left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 20px 0 20px 20px;
+    width: 100px;
+    background-color:#1d2531;
+}
+.toplist li{
+    padding-bottom: 20px;
+}
+.bottomlist{
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+.bottomlist li{
+    float: left;
+}
+.bottomlist li:nth-of-type(1){
+    margin-right: 16px;
+}
+.mid{
+    width: 250px;
+    background-color: #222c3c;
+    position: fixed;
+    top: 0;
+    left: 100px;
+    box-sizing: border-box;
+}
