@@ -5,8 +5,8 @@
     <title>IFE ECMAScript</title>
 </head>
 <body>        
-    <input id="first-number" type="number" value="0" placeholder="第一个数字">
-    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <input id="first-number" value="0" placeholder="第一个数字">
+    <input id="second-number"  value="0" placeholder="第二个数字">
     <button id="add-btn">加</button>
     <button id="minus-btn">减</button>
     <button id="times-btn">乘</button>
@@ -21,28 +21,56 @@
             times_btn=document.getElementById('times-btn') ,
             divide_btn=document.getElementById('divide-btn');
 
-            console.log(times_btn)
+        function get_values(){
+            let a=Number(document.getElementById('first-number').value),
+                b=Number(document.getElementById('second-number').value);
+            if(a!==a || b!==b){
+                throw('error input')
+                return
+            }
+            return [a,b]
+        }
 
-            add_btn.onclick=function(){
-                numberOne=Number(document.getElementById('first-number').value),
-                numberTwo=Number(document.getElementById('second-number').value),   
+        add_btn.onclick=function(){
+            try{
+                [numberOne,numberTwo]=get_values()
                 result.innerHTML=numberOne+numberTwo
+            }catch(e){
+                console.log(e);
             }
-            minus_btn.onclick=function(){
-                numberOne=Number(document.getElementById('first-number').value),
-                numberTwo=Number(document.getElementById('second-number').value),
+          
+        };
+        minus_btn.onclick=function(){
+            try{
+                [numberOne,numberTwo]=get_values() 
                 result.innerHTML=numberOne-numberTwo
+            }catch(e){
+                console.log(e)
             }
-            times_btn.onclick=function(){
-                numberOne=Number(document.getElementById('first-number').value),
-                numberTwo=Number(document.getElementById('second-number').value),
+            
+        };
+        times_btn.onclick=function(){
+            try{
+                [numberOne,numberTwo]=get_values() 
                 result.innerHTML=numberOne*numberTwo
+            }catch(e){
+                console.log(e)
             }
-            divide_btn.onclick=function(){
-                numberOne=Number(document.getElementById('first-number').value),
-                numberTwo=Number(document.getElementById('second-number').value),
+            
+        };
+        divide_btn.onclick=function(){
+            try{
+                [numberOne,numberTwo]=get_values() 
+                if(numberTwo===0){
+                    throw('invalid divide')
+                }
                 result.innerHTML=numberOne/numberTwo
+            }catch(e){
+                console.log(e)
             }
+        };
+
+
     </script>
 </body>
 </html>
