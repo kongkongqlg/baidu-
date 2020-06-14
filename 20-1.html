@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="name" type="text">    
+    <button id="submit-btn">Submit</button>
+    <script>
+        window.onload=function(){
+            var btn=document.getElementById('submit-btn'),
+                inp=document.getElementById('name'),
+                cont;
+            
+            btn.onclick=function(){
+            console.log(inp.value)
+            }
+
+            inp.onkeydown = function (e) {
+                if (!e) e = window.event;
+                if ((e.keyCode || e.which) == 13) {
+                    console.log(inp.value)
+                }
+                if((e.keyCode || e.which) == 27){
+                    inp.value=''
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
+
+<!-- 当点击按钮 submit-btn 时，在console中输出 name 中的内容
+在输入过程中，如果按回车键，则同样执行上一条的需求
+在输入过程中，如果按 ESC 键，则把输入框中的内容清空

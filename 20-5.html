@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            margin: 10px auto;
+            width: 500px;
+            height: 480px;
+            background-image: url('cssSprite.jpg');
+            background-position: 0 0;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var obj=document.querySelector('.box'),
+            top_dis=0;
+        function own_animation(){
+            top_dis+=-480
+            obj.style.backgroundPosition=0+ ' '+top_dis+'px'
+        }
+        setInterval(own_animation,100)
+    </script>
+</body>
+</html>
