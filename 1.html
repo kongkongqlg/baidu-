@@ -1,60 +1,53 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
-    <title>帧动画</title>
-    <meta charset="utf-8">
-
-    <style type="text/css">
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        /* 设置承载背景图片的 div */
-        .ani {
-            border: 1px solid black;
-            width: 500px;
-            height: 480px;
-            max-width: 500px;
-            max-height: 480px;
-            margin: 10px auto;
-            /* 加载图像 */
-            background-image: url("cssSprite.jpg");
-            /* 让它在 y 轴重复，这样可以实现连续的帧动画 */
-            /* background-repeat: repeat-y; */
-            /* 设置初始位置 */
-            background-position: 0 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue学习</title>
 </head>
 
 <body>
-    <div class="ani">
+  <div id="app"></div>
 
-    </div>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+  <!-- 1. 引用 axios -->
+  <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+  
+  <script>
 
-    <script type="text/javascript">
-        var aniPosition = document.querySelector('.ani');
-        var i = 0;
-
-        function changeImage() {
-            // 因为我的 div 的高设置为 480px，所有每次向下 480px切换到下一张图片
-            i += -480;
-            aniPosition.style.backgroundPosition = "0px " + i + "px";
+    new Vue({
+      el: document.getElementById('app'),
+      template: `
+        <div>
+          <button @click="sendAjax">发送请求</button>
+          <span>数据为：</span>
+          {{ getData }}
+        </div>
+      `,
+      data() {
+        return {
+          getData: ''
         }
-
-        function start() {
-            // 设置的时间间隔为 100s
-            setInterval('changeImage()', 100);
-
+      },
+      methods: {
+        sendAjax() {
+          // 直接使用 axios
+          // get 为请求方式
+          axios.get('https://www.easy-mock.com/mock/5be3885e033152564881d354/getInfo')
+          // then 为 promise 获取数据
+          .then((res) => {
+            this.getData = res.data;
+          })
+          // catch 为 promise 捕获异常
+          .catch();
         }
+      }
+    })
 
-        // 加载初始化方法
-        window.onload = function () {
-            start();
-        }
-    </script>
+  </script>
 </body>
 
 </html>
