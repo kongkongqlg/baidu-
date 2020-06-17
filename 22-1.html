@@ -7,8 +7,8 @@
 </head>
 <body>
     <div>
-        <label>Number A:<input id="radio-a" type="radio" name="math-obj" value="a" onchange="isNumber('num-a')"></label><input id="num-a" type="text">
-        <label>Number B:<input id="radio-b" type="radio" name="math-obj" value="b" onchange="isNumber('num-a')"></label><input id="num-b" type="text">
+        <label>Number A:<input id="radio-a" type="radio" name="math-obj" value="a"></label><input id="num-a" type="text">
+        <label>Number B:<input id="radio-b" type="radio" name="math-obj" value="b"></label><input id="num-b" type="text">
     </div>
     <div>
         <button>判断当前选中的输入框输入内容是否为数字</button>
@@ -25,20 +25,116 @@
         var a_radio=document.getElementById('radio-a'),
             b_radio=document.getElementById('radio-b'),
             a_num=document.getElementById('num-a'),
-            b_num=document.getElementById('num-b');
+            b_num=document.getElementById('num-b'),
+            btn=document.querySelectorAll('button'),
+            p=document.getElementById('result');
         // 按照HTML中按钮的描述以此实现功能
         // 计算结果显示在 id 为 result 的 P 标签中
         // 除了第一个按钮，其它按钮操作时，都需要判断输入是否为数字，否则在 console 中输出错误信息
 
+        btn[0].onclick=function(){
+            if(a_radio.checked===true){
+                if(a_num.value==='' || isNaN(a_num.value)){
+                    alert('输入不为数字')
+                }else{
+                    alert('输入为数字')
+                }
+            }else if(b_radio.checked===true){
+                if(b_num.value==='' || isNaN(b_num.value)){
+                    alert('输入不为数字')
+                }else{
+                    alert('输入为数字')
+                }
+            }
+        }
 
-        function isNumber(obj_id){
-            let val=document.getElementById(obj_id).val
-            return function (val){ 
-                console.log(typeof(val)===Number)
+        btn[2].onclick=function(){
+            if(a_radio.checked===true){
+                if(a_num.value==='' || isNaN(a_num.value)){
+                    alert('请输入数字')
+                    a_num.value=''
+                }else{
+                    p.innerHTML=Math.abs(a_num.value)
+                }
+            }else if(b_radio.checked===true){
+                if(b_num.value==='' || isNaN(b_num.value)){
+                    alert('请输入数字')
+                    b_num.value=''
+                }else{
+                    p.innerHTML=Math.abs(b_num.value)
+                }
+            }
+        }
+
+        btn[3].onclick=function(){
+            if(a_radio.checked===true){
+                if(a_num.value==='' || isNaN(a_num.value)){
+                    alert('请输入数字')
+                    a_num.value=''
+                }else{
+                    p.innerHTML=Math.ceil(a_num.value)
+                }
+            }else if(b_radio.checked===true){
+                if(b_num.value==='' || isNaN(b_num.value)){
+                    alert('请输入数字')
+                    b_num.value=''
+                }else{
+                    p.innerHTML=Math.ceil(b_num.value)
+                }
+            }
+        }
+
+        btn[4].onclick=function(){
+            if(a_radio.checked===true){
+                if(a_num.value==='' || isNaN(a_num.value)){
+                    alert('请输入数字')
+                    a_num.value=''
+                }else{
+                    p.innerHTML=Math.floor(a_num.value)
+                }
+            }else if(b_radio.checked===true){
+                if(b_num.value==='' || isNaN(b_num.value)){
+                    alert('请输入数字')
+                    b_num.value=''
+                }else{
+                    p.innerHTML=Math.floor(b_num.value)
+                }
             }
         }
         
-        
+        btn[5].onclick=function(){
+            if(a_radio.checked===true){
+                if(a_num.value==='' || isNaN(a_num.value)){
+                    alert('请输入数字')
+                    a_num.value=''
+                }else{
+                    p.innerHTML=Math.round(a_num.value)
+                }
+            }else if(b_radio.checked===true){
+                if(b_num.value==='' || isNaN(b_num.value)){
+                    alert('请输入数字')
+                    b_num.value=''
+                }else{
+                    p.innerHTML=Math.round(b_num.value)
+                }
+            }
+        }
+
+        btn[6].onclick=function(){
+            if((a_num.value==='' || isNaN(a_num.value)) || (b_num.value==='' || isNaN(b_num.value))){
+                alert('请输入数字')
+            }else{
+                p.innerHTML=Math.max(a_num.value,b_num.value)
+            }
+        }
+
+        btn[7].onclick=function(){
+            if((a_num.value==='' || isNaN(a_num.value)) || (b_num.value==='' || isNaN(b_num.value))){
+                alert('请输入数字')
+            }else{
+                p.innerHTML=Math.min(a_num.value,b_num.value)
+            }
+        }
         
     </script>
 </body>
