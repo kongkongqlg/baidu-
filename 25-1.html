@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+    <script>
+        var p=document.querySelector('p'),
+            time;
+
+        function format_own(val){
+            let res= val<10 ? ('0'+val) : val
+            return res
+        }
+
+        function weeknum(day){
+            var res='',
+                eng=''
+            switch(day){
+                case 0:
+                    res='星期天'
+                    eng='Sunday'
+                    break;
+                case 1:
+                    res='星期一'
+                    eng='Monday'
+                    break;
+                case 2:
+                    res='星期二'
+                    eng='Tuesday'
+                    break;
+                case 3:
+                    res='星期三'
+                    eng='Wednesday'
+                    break;
+                case 4:
+                    res='星期四'
+                    eng='Thursday'
+                    break;
+                case 5:
+                    res='星期五'
+                    eng='Friday'
+                    break;
+                case 6:
+                    res='星期六'
+                    break;
+            }
+            return [res,eng]
+        }
+
+        function format_out1(date){
+            var res='',
+                year=time.getFullYear(),
+                month=format_own(time.getMonth()+1),
+                date=format_own(time.getDate()),
+                day=weeknum(time.getDay())[0],
+                hour=format_own(time.getHours()),
+                minute=format_own(time.getMinutes()),
+                sencond=format_own(time.getSeconds());
+            res=year+'年'+month+'月'+date+'日'+day+hour+':'+minute+':'+sencond
+            return res
+        }
+
+        function format_out2(date){
+            var res=''
+                year=time.getFullYear(),
+                month=format_own(time.getMonth()+1),
+                date=format_own(time.getDate()),
+                day=weeknum(time.getDay())[1],
+                hour=format_own(time.getHours()),
+                minute=format_own(time.getMinutes()),
+                sencond=format_own(time.getSeconds()),
+                mark='';
+            mark=(hour<12) ? 'AM' : 'PM'
+
+            res=year+'-'+month+'-'+date+' '+day+' '+hour+':'+minute+':'+sencond+' '+mark
+            return res
+        }
+
+        setInterval(function(){
+                        time=new Date()
+                        p.innerHTML=format_out2(time)
+                    },1000)
+    </script>
+</body>
+</html>
