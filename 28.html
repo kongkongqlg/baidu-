@@ -11,6 +11,10 @@
             margin: 0;
             padding: 0;
         }
+
+        ul li:hover{
+            background-color: yellow;
+        }
     </style>
 </head>
 <body>
@@ -26,7 +30,7 @@
         function ul_creater1(inputval){
             var res=''
             postfixList.forEach(function(curvalue){
-                    res+="<li style='text-align:left;border:1px solid gray'>"+ inputval+'@'+curvalue + "</li>"
+                    res+="<li style='text-align:left;border:1px solid gray' click=handleClick onmouseover=handleOnmouseover>"+ inputval+'@'+curvalue + "</li>"
             })
             return res
         }
@@ -48,20 +52,30 @@
                 end2=arr2[1];
             postfixList.forEach(function(curvalue){
                     if(curvalue.indexOf(end2)===0){
-                        res+="<li style='text-align:left;border:1px solid gray'>"+front2+'@'+curvalue + "</li>"
+                        res+="<li style='text-align:left;border:1px solid gray' >"+front2+'@'+curvalue + "</li>"
                     }
             })
             res=res || ul_creater2(inputval)
             return res
         }
 
+
         input.onkeyup=function(){
             var input_content=this.value.trim(),
                 ul_inner='';
+            ul.style.display=''
             if(input_content!==''){
                ul_inner=ul_creater3(input_content)
             }
             ul.innerHTML=ul_inner
+        }
+
+        ul.onclick=function(ev){
+            var event=ev || window.event
+            // console.log(event)
+            var target=event.target||event.srcElement
+            input.value=target.innerHTML
+            ul.style.display='none'
         }
     </script>
 </body>
