@@ -22,13 +22,44 @@
         var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
         var input=document.querySelector('input'),
             ul=document.querySelector('ul');
+
+        function ul_creater1(inputval){
+            var res=''
+            postfixList.forEach(function(curvalue){
+                    res+="<li style='text-align:left;border:1px solid gray'>"+ inputval+'@'+curvalue + "</li>"
+            })
+            return res
+        }
+
+        function ul_creater2(inputval){
+            var arr=inputval.split('@'),
+                front_cont=arr[0],
+                res='';
+            postfixList.forEach(function(curvalue){
+                    res+="<li style='text-align:left;border:1px solid gray'>"+ front_cont+'@'+curvalue + "</li>"
+            })
+            return res
+        }
+
+        function ul_creater3(inputval){
+            var res='',
+                arr2=inputval.split('@'),
+                front2=arr2[0],
+                end2=arr2[1];
+            postfixList.forEach(function(curvalue){
+                    if(curvalue.indexOf(end2)===0){
+                        res+="<li style='text-align:left;border:1px solid gray'>"+front2+'@'+curvalue + "</li>"
+                    }
+            })
+            res=res || ul_creater2(inputval)
+            return res
+        }
+
         input.onkeyup=function(){
             var input_content=this.value.trim(),
                 ul_inner='';
             if(input_content!==''){
-                postfixList.forEach(function(curvalue){
-                    ul_inner+="<li style='text-align:left;border:1px solid gray'>"+ input_content+'@'+curvalue + "</li>"
-                })
+               ul_inner=ul_creater3(input_content)
             }
             ul.innerHTML=ul_inner
         }
