@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="year-select">
+    </select>
+    
+    <select id="month-select">
+    </select>
+    
+    <select id="day-select">
+    </select>
+    
+    <select id="hour-select">
+    </select>
+    
+    <select id="minite-select">
+        <option>59</option>
+    </select>
+    
+    <select id="second-select">
+    </select>
+    
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+
+    <script>
+        var selects=document.querySelectorAll('select'),
+            year_sel=document.querySelector('#year-select'),
+            month_sel=document.querySelector('#month-select'),
+            day_sel=document.querySelector('#day-select'),
+            hour_sel=document.querySelector('#hour-select'),
+            min_sel=document.querySelector('#minite-select'),
+            sen_sel=document.querySelector('#second-select'),
+            p=document.querySelector('p') ;
+        
+        function creOptions(start,end,selectid){
+            let val=start;
+            while(val<=end){
+                selectid.options.add(new Option(val,val))
+                val+=1
+            }
+        }
+        creOptions(2000,2040,year_sel)
+        creOptions(0,11,month_sel)
+        creOptions(1,31,day_sel)
+        creOptions(0,59,hour_sel)
+        creOptions(0,59,min_sel)
+        creOptions(0,59,sen_sel)
+
+        function own_time(){
+            var year=year_sel.value,
+                month=month_sel.value,
+                day=day_sel.value,
+                hour=hour_sel.value,
+                min=min_sel.value,
+                sen=sen_sel.value,
+                time_own=new Date(year,month,day,hour,min,sen),
+                weeknum=time_own.getDay(),
+                now=new Date(),
+                mark='';
+            if(time_own>now){
+                mark='还有'
+            }else{
+                mark='已经过去'
+            }
+            var year_diff=Math.abs(year-now.getFullYear()),
+                month_diff=Math.abs(month-now.getMonth()),
+                day_diff=Math.abs(day-now.getDate()),
+                hour_diff=Math.abs(hour-now.getHours()),
+                min_diff=Math.abs(min-now.getMinutes()),
+                sen_diff=Math.abs(sen-now.getSeconds()),
+                res='';
+            res='现在距离'+' '+year+'年'+(month+1)+'月'+day+'日'+weeknum + ' '/
+                
+        }
+        
+    </script>
+</body>
+</html>

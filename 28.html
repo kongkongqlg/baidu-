@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: none;
+            width: 165px;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text">
+        <ul id="email-sug-wrapper" class="email-sug"></ul>
+    </div>
+    <script>
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        var input=document.querySelector('input'),
+            ul=document.querySelector('ul');
+        input.onkeyup=function(){
+            var input_content=this.value.trim(),
+                ul_inner='';
+            if(input_content!==''){
+                postfixList.forEach(function(curvalue){
+                    ul_inner+="<li style='text-align:left;border:1px solid gray'>"+ input_content+'@'+curvalue + "</li>"
+                })
+            }
+            ul.innerHTML=ul_inner
+        }
+    </script>
+</body>
+</html>

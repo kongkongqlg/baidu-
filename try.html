@@ -1,0 +1,104 @@
+<html>
+    <body>
+        <select id="year-select">
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            ……
+            <option value="2032">2032</option>
+        </select>
+        
+        <select id="month-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            ……
+            <option value="12">12</option>
+        </select>
+        
+        <select id="day-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            ……
+            <option value="31">31</option>
+        </select>
+        
+        <select id="hour-select">
+            <option value="0">00</option>
+            <option value="1">01</option>        
+            ……
+            <option value="23">23</option>
+        </select>
+        
+        <select id="minite-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            ……
+            <option>59</option>
+        </select>
+        
+        <select id="second-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            ……
+            <option>59</option>
+        </select>
+        
+        <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+        <script>
+            var sels = document.getElementsByTagName('select');
+            var sda = new Date(2000, 1, 1, 0, 0, 0);
+
+            var re = document.getElementById('result-wrapper')
+            function on(en) {
+                function dis() {
+                    function disSel(da) {
+                        function bu(n) {
+                            if (n <= 9) return '0' + n;
+                            else return n;
+                        }
+                        function xinqi(n) {
+                            var t = ['一', '二', '三', '四', '五', '六', '日'];
+                            return t[n];
+                        }
+                        var dis = '';
+                        dis += da.getFullYear() + '年';
+                        dis += bu(da.getMonth()) + '月';
+                        dis += bu(da.getDate()) + '日';
+                        dis += '星期' + xinqi(da.getDay());
+                        dis += ' ';
+                        dis += da.toTimeString().split(' ')[0];
+                        return dis;
+                    }
+                    function disLi(sda) {
+                        var da = new Date();
+                        var zhong, tms = 1000 * 60 * 60 * 24, hms = 1000 * 60 * 60, mms = 1000 * 60;
+                        var cha = da.getTime() - sda.getTime();
+                        if (cha < 0) zhong = ' 还有 ', cha = - cha;
+                        else zhong = ' 已经过去 ';
+                        dis = '';
+                        dis += Math.floor(cha / tms) + ' 天 '; cha %= tms;
+                        dis += Math.floor(cha / hms) + ' 小时 '; cha %= hms;
+                        dis += Math.floor(cha / mms) + ' 分 '; cha %= mms;
+                        dis += Math.floor(cha / 1000) + ' 秒'; cha %= 1000;
+                        return zhong + dis;
+                    }
+                    return '现在距离 ' + disSel(sda) + disLi(sda);
+                }
+                if (en.target == sels[0]) {
+                    sda.setFullYear(sels[0].value); re.innerHTML = dis();
+                } else if (en.target == sels[1]) {
+                    sda.setMonth(sels[1].value); re.innerHTML = dis();
+                } else if (en.target == sels[2]) {
+                    sda.setDate(sels[2].value); re.innerHTML = dis();
+                } else if (en.target == sels[3]) {
+                    sda.setHours(sels[3].value); re.innerHTML = dis();
+                } else if (en.target == sels[4]) {
+                    sda.setMinutes(sels[4].value); re.innerHTML = dis();
+                } else {
+                    sda.setSeconds(sels[5].value); re.innerHTML = dis();
+                }
+            }
+            document.addEventListener('change', on);
+           </script>
+    </body>
+</html>
