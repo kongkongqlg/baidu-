@@ -12,8 +12,17 @@
             padding: 0;
         }
 
+        ul li{
+            border:1px solid gray;
+            text-align:left;
+        }
+
         ul li:hover{
             background-color: yellow;
+        }
+
+        .selected{
+            background-color: red;
         }
     </style>
 </head>
@@ -25,12 +34,13 @@
     <script>
         var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
         var input=document.querySelector('input'),
-            ul=document.querySelector('ul');
+            ul=document.querySelector('ul'),
+            cur_index=0;
 
         function ul_creater1(inputval){
             var res=''
             postfixList.forEach(function(curvalue){
-                    res+="<li style='text-align:left;border:1px solid gray' click=handleClick onmouseover=handleOnmouseover>"+ inputval+'@'+curvalue + "</li>"
+                    res+="<li>"+ inputval+'@'+curvalue + "</li>"
             })
             return res
         }
@@ -40,7 +50,7 @@
                 front_cont=arr[0],
                 res='';
             postfixList.forEach(function(curvalue){
-                    res+="<li style='text-align:left;border:1px solid gray'>"+ front_cont+'@'+curvalue + "</li>"
+                    res+="<li>"+ front_cont+'@'+curvalue + "</li>"
             })
             return res
         }
@@ -52,31 +62,86 @@
                 end2=arr2[1];
             postfixList.forEach(function(curvalue){
                     if(curvalue.indexOf(end2)===0){
-                        res+="<li style='text-align:left;border:1px solid gray' >"+front2+'@'+curvalue + "</li>"
+                        // if(res=''){
+                        //     res+="<li class='selected'>"+ inputval+'@'+curvalue + "</li>"
+                        // }else{
+                        //     res+="<li>"+front2+'@'+curvalue + "</li>"
+                        // }
+                        res+="<li>"+front2+'@'+curvalue + "</li>"
                     }
             })
             res=res || ul_creater2(inputval)
             return res
         }
 
+        function encode_own(str){
+            var s = "";
+            if(str.length == 0) return "";
+            s = str.replace(/&/g,"&amp;");           
+            s = s.replace(/</g,"&lt;");      
+            s = s.replace(/>/g,"&gt;"); 
+            s = s.replace(/ /g,"&nbsp;");
+            s = s.replace(/\'/g,"'");
+            s = s.replace(/\"/g,'"');
+            return s
+        }
+
+        function decode_own(str){
+            var s = "";
+            if(str.length == 0) return "";           
+            s = str.replace(/&amp;/g,"&");           
+            s = s.replace(/&lt;/g,"<");            
+            s = s.replace(/&gt;/g,">");           
+            s = s.replace(/&nbsp;/g," ");            
+            s = s.replace(/'/g,"\'");            
+            s = s.replace(/"/g,"\"");            
+            return s; 
+        }
 
         input.onkeyup=function(){
             var input_content=this.value.trim(),
+                key=event.keyCode?event.keyCode:event.which,
                 ul_inner='';
-            ul.style.display=''
-            if(input_content!==''){
-               ul_inner=ul_creater3(input_content)
+
+            if(key===38 && ul.children!==null){
+                ul.children[cur_index].className=''
+                if(cur_index===0){
+                    cur_index=ul.children.length-1
+                }else{
+                    cur_index-=1
+                }
+                ul.children[cur_index].className='selected'
+            }else if(key===40 && ul.children!==null){
+                ul.children[cur_index].className=''
+                if(cur_index===ul.children.length-1){
+                    cur_index=0
+                }else{
+                    cur_index+=1
+                }
+                ul.children[cur_index].className='selected'
+            }else if((key===13 || key===108) && ul.children!==null){
+                input.value=decode_own(ul.children[cur_index].innerHTML)
+            }else{
+                ul.style.display=''
+                if(input_content!==''){
+                //    ul_inner=ul_creater3(input_content)
+                    ul_inner=ul_creater3(encode_own(input_content))
+                }
+                ul.innerHTML=ul_inner
+                ul.firstElementChild.className='selected'
             }
-            ul.innerHTML=ul_inner
         }
 
         ul.onclick=function(ev){
             var event=ev || window.event
             // console.log(event)
             var target=event.target||event.srcElement
-            input.value=target.innerHTML
+            // input.value=target.innerHTML
+            input.value=decode_own(target.innerHTML)
             ul.style.display='none'
         }
+
+
     </script>
 </body>
 </html>
