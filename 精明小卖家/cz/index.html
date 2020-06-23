@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/ife31data.js"></script>
+</head>
+<body onload="init()">
+    <form action=""></form>
+        <div id='region_area'>
+            <label for="">请选择地区</label>
+            <input type="checkbox" name="" id="region_selAll">全选
+            <div id="region_sel">
+                <input type="checkbox" name="region"  value="华东" checked='checked'>华东
+                <input type="checkbox" name="region" value="华南">华南
+                <input type="checkbox" name="region" value="华北">华北
+            </div>
+        </div>
+        <div id='cargo_area'>
+            <label for="">请选择商品</label>
+            <input type="checkbox" name="" id="cargo_selAll">全选
+            <div id="cargo_sel">
+                <input type="checkbox" name="cargo"  value="手机" checked='checked'>手机
+                <input type="checkbox" name="cargo" value="笔记本">笔记本
+                <input type="checkbox" name="cargo" value="智能音箱">智能音箱
+            </div>
+        </div>
+        <div class="table-wraper">
+            <table>
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </form>
+    <script src="./js/index.js"></script>
+    <script>
+    </script>
+</body>
+</html>
