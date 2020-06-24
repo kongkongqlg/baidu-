@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>svg柱状图</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="600" style="border: 1px solid;" id="main">
+        <defs id="effectList">
+        </defs>
+        <g stroke="#555" stroke-width="2">
+            <!--绘制x轴-->
+            <line x1="50" y1="550" x2="750" y2="550"></line>
+            <line x1="730" y1="540" x2="750" y2="550"></line>
+            <line x1="730" y1="560" x2="750" y2="550"></line>
+            <!--绘制Y轴-->
+            <line x1="50" y1="550" x2="50" y2="50"></line>
+            <line x1="40" y1="70" x2="50" y2="50"></line>
+            <line x1="60" y1="70" x2="50" y2="50"></line>
+        </g>
+        <g font-size="20px">
+            <text x="20" y="40">年龄/岁</text>
+            <text x="760" y="555">姓名</text>
+        </g>
+    </svg>
+    <script>
+        var data = [{
+            name: "狗剩",
+            age: 22
+        }, {
+            name: "二蛋",
+            age: 20
+        }, {
+            name: "王麻子",
+            age: 21
+        }, {
+            name: "周扒皮",
+            age: 40
+        }, {
+            name: "仔仔",
+            age: 20
+        }];
+        var colWidth = 650 / (2 * data.length + 1);
+        for (var i = 0; i < data.length; i++) {
+            var d = data[i]; //遍历每个数据对象
+            var cw = colWidth; //柱子的宽
+            var ch = d.age * 10; //柱子的高
+            var x = (2 * i + 1) * colWidth + 50;
+            var y = 600 - 50 - ch;
+            //动态添加渐变对象
+            var c = rc(); //渐变颜色
+            
+            //样式列表
+            effectList.innerHTML += `
+        <linearGradient id="g${i}" x1="0" y1="0" x2="0" y2="100%">
+          <stop offset="0" stop-color="${c}"></stop>
+          <stop offset="100%" stop-color="${c}" stop-opacity="0"></stop>
+        </linearGradient>`;
+        
+            //动态创建矩形
+            var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('width', cw);
+            rect.setAttribute('height', ch);
+            rect.setAttribute('x', x);
+            rect.setAttribute('y', y);
+            rect.setAttribute('fill', `url(#g${i})`);
+            main.appendChild(rect);
+
+            // 动态添加数据具体项名称
+            var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', (2 * i + 1) * colWidth + 55);
+            text.setAttribute('y', 570);
+            text.innerHTML = data[i].name;
+            main.appendChild(text);
+
+            // 动态添加数据具体项的值
+            var val = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            val.setAttribute('x', x + 20);
+            val.setAttribute('y', y - 5);
+            val.innerHTML = data[i].age;
+            main.appendChild(val);
+
+        }
+
+        // 设置y轴刻度
+        var y = 50;
+        var age = 50;
+        for (var i = 0; i < 10; i++) {
+            y += 50;
+            age -= 5;
+            var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            var text1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            line.setAttribute('x1', '50');
+            line.setAttribute('y1', y);
+            line.setAttribute('x2', '55');
+            line.setAttribute('y2', y);
+            line.setAttribute('stroke', "#000");
+            text1.setAttribute('x', '25');
+            text1.setAttribute('y', y);
+            text1.innerHTML = age;
+            main.appendChild(line);
+            main.appendChild(text1);
+        }
+
+        // 随机颜色
+        function rc() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`
+        }
+    </script>
+</body>
+</html>
