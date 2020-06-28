@@ -6,6 +6,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/ife31data.js"></script>
+    <style>
+        canvas {
+            border: 1px solid #00CED1;
+        }
+    </style>
 </head>
 <body onload="init()">
     <form action=""></form>
@@ -27,20 +32,66 @@
                 <input type="checkbox" name="cargo" value="智能音箱">智能音箱
             </div>
         </div>
-        <div class="table-wraper">
-            <table>
-                <thead></thead>
-                <tbody></tbody>
-            </table>
-        </div>
     </form>
+    <div id="wrapper" style="width: 1450;height: 500px;">
+        <div style="float: left;">
+            <canvas width="600" height="500"></canvas>
+        </div>
+        <div style="float: left;">
+            <svg width="800" height="500" style="border: 1px solid;" id="main">
+                <defs id="effectList">
+                </defs>
+                <g stroke="#555" stroke-width="2">
+                    <!--绘制x轴-->
+                    <line x1="50" y1="450" x2="750" y2="450"></line>
+                    <line x1="730" y1="440" x2="750" y2="450"></line>
+                    <line x1="730" y1="460" x2="750" y2="450"></line>
+                    <!--绘制Y轴-->
+                    <line x1="50" y1="450" x2="50" y2="50"></line>
+                    <line x1="40" y1="70" x2="50" y2="50"></line>
+                    <line x1="60" y1="70" x2="50" y2="50"></line>
+                </g>
+                <g font-size="20px">
+                    <text x="20" y="40">销量</text>
+                    <text x="760" y="455">月份</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <div class="table-wraper">
+        <table>
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
     <!-- <script src="./js/index.js"></script> -->
     <script src="./js/index.js"></script>
     <script src="./js/checkbox.js"></script>
     <script src="./js/table.js"></script>
     <script src="./js/data.js"></script>
+    <script src="./js/line.js"></script>
+    <script src="./js/bar.js"></script>
     <script src="./js/app.js"></script>
     <script>
+        oTBody.addEventListener('mouseover',function(ev){
+            var event=ev || window.event,
+                target= event .target || event .srcElement,
+                tmpData=[];
+            data=[]
+            lineChart.init(data)
+            if(target.nodeName.toLowerCase() === 'td'){
+                var trNode=target.parentNode,
+                    len=trNode.children.length;
+                for(let i=2;i<len;i++){
+                    tmpData.push(Number(trNode.cells[i].textContent))
+                }
+            }
+            data=tmpData
+            lineChart.init(data)
+            secbar(data)
+
+        })
     </script>
 </body>
 </html>

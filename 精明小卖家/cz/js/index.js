@@ -6,7 +6,11 @@ var region_selAll=document.getElementById('region_selAll'),
     oTHead = oTab.tHead;
     oTBody = oTab.tBodies[0],
     regionSelected=['华东'],
-    cargoSelected=['手机'];
+    cargoSelected=['手机'],
+    effectList=document.getElementById('effectList'),
+    main=document.querySelector('svg'),
+    colWidth = 650 /25,
+    data = [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270];
 
 // console.log(cargo_selAll)
 
