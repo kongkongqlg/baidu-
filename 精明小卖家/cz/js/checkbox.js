@@ -63,7 +63,7 @@ function sel_regionchange(){
     }
     // var regiondata=region2data(regionSelected)
     // console.log(regionSelected)
-    tbody_pro(data_pro(regionSelected,cargoSelected))
+    init()
 }
 
 function sel_cargochange(){
@@ -90,5 +90,5 @@ function sel_cargochange(){
     }
     // var regiondata=region2data(regionSelected)
     // console.log(regionSelected)
-    tbody_pro(data_pro(regionSelected,cargoSelected))
+    init()
 }

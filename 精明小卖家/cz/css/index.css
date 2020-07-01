@@ -14,3 +14,8 @@ table thead{
     border: 1px gray solid;
     background-color: darkgrey;
 }
+
+.EditCell_TextBox {
+    width: 90%;
+    border:1px solid #0099CC;
+    }

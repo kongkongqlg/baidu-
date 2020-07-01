@@ -77,13 +77,11 @@ function secbar(data){
     var childs=main.children,
         index=0,
         i=9; 
-
     while(i>=9 && i<=44){
         // let x = (2 * i + 1) * colWidth + 50;
         let y = 450 - data[index];
         // let x=(2 * i + 1) * colWidth + 50,
         //     y=450-data[index];
-
         main.children[i].setAttribute('height',data[index])
         main.children[i].setAttribute('y',y)
         main.children[i+2].innerHTML = data[index]

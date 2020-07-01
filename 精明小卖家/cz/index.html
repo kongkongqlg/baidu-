@@ -12,7 +12,7 @@
         }
     </style>
 </head>
-<body onload="init()">
+<body onload="firstinit()">
     <form action=""></form>
         <div id='region_area'>
             <label for="">请选择地区</label>
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="table-wraper">
-        <table>
+        <table style="position: relative;">
             <thead></thead>
             <tbody></tbody>
         </table>
@@ -70,28 +70,12 @@
     <script src="./js/checkbox.js"></script>
     <script src="./js/table.js"></script>
     <script src="./js/data.js"></script>
+    <script src="./js/localstorage.js"></script>
     <script src="./js/line.js"></script>
     <script src="./js/bar.js"></script>
     <script src="./js/app.js"></script>
     <script>
-        oTBody.addEventListener('mouseover',function(ev){
-            var event=ev || window.event,
-                target= event .target || event .srcElement,
-                tmpData=[];
-            data=[]
-            lineChart.init(data)
-            if(target.nodeName.toLowerCase() === 'td'){
-                var trNode=target.parentNode,
-                    len=trNode.children.length;
-                for(let i=2;i<len;i++){
-                    tmpData.push(Number(trNode.cells[i].textContent))
-                }
-            }
-            data=tmpData
-            lineChart.init(data)
-            secbar(data)
-
-        })
+        oTBody.addEventListener('mouseover',mouseoverhandle)
     </script>
 </body>
 </html>
