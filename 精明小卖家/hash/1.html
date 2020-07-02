@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="a">A</button>
+    <button id="b">B</button>
+    <button id="c">C</button>
+    <div id="cont"></div>
+</body>
+<script>
+    var cont=document.querySelector('#cont'),
+        btns=document.querySelectorAll('button'),
+        a_btn=document.querySelector('#a'),
+        b_btn=document.querySelector('#b'),
+        c_btn=document.querySelector('#c');
+    function gethash(){
+        let hash_now= window.location.hash || '/'
+        return hash_now.slice(1)
+    }
+
+    function render_own(){
+        // console.log('hash changed')
+        var hashval=gethash()
+        // console.log(hashval)
+        switch(hashval) {
+        case '/':
+            break;
+        case '/a':
+            cont.innerHTML=a_btn.innerHTML
+            break;
+        case '/b':
+            cont.innerHTML=b_btn.innerHTML
+            break;
+        case '/c':
+            cont.innerHTML=c_btn.innerHTML
+            break;
+        default:
+            break;
+        } 
+        }
+
+    function  clickhandle(ev){
+        var event=ev || window.event,
+            target= event .target || event .srcElement;
+            id_val=target['id'];
+
+        // console.log(target);
+        
+        
+        switch(id_val){
+            case 'a':
+                window.location.hash='/a'
+                break;
+            case 'b':
+                window.location.hash='/b'
+                break;
+            case 'c':
+                window.location.hash='/c'
+                break;
+            default:
+                break;
+        }
+    }
+    
+    for(let i=0,len=btns.length;i<len;i++){
+        btns[i].addEventListener('click',clickhandle)
+    }
+    window.onhashchange = render_own
+</script>
+</html>
