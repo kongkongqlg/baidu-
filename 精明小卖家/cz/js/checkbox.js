@@ -63,6 +63,7 @@ function sel_regionchange(){
     }
     // var regiondata=region2data(regionSelected)
     // console.log(regionSelected)
+    sethash(regionSelected,cargoSelected)
     init()
 }
 
@@ -90,5 +91,6 @@ function sel_cargochange(){
     }
     // var regiondata=region2data(regionSelected)
     // console.log(regionSelected)
+    sethash(regionSelected,cargoSelected)
     init()
 }
