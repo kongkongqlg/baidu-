@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Restaurant(obj){
+            this.cash=obj.cash
+            this.sets=obj.sets
+            this.staff=obj.staff
+        }
+        Restaurant.prototype.hire=function(obj){
+            if(this.staff.indexOf(obj.name)===-1){
+                this.staff.push(obj.name)
+            }
+        }
+        Restaurant.prototype.fire=function(obj){
+            let index=this.staff.indexOf(obj.name)
+            if(index!==-1){
+                this.staff.splice(index,1)
+                // console.log(temp)
+                // this.staff=temp
+            }
+        };
+
+
+        function Staff(id,name,salary){
+            this.id=id
+            this.name=name
+            this.salary=salary
+        }
+        Staff.prototype.workDonebyStaff=function(){
+
+        }
+
+
+        function Waitress(id,name,salary){
+            Staff.call(this,id,name,salary)
+        }
+        Waitress.prototype.workDonebyWaitress=function(obj){
+            if(Array.isArray(obj)){
+                // 点菜行为
+            }else{
+                // 上菜行为
+            }
+        }
+        
+
+        function Cooker(id,name,salary){
+            Staff.call(this,id,name,salary)
+        }
+        Cooker.prototype.workDonebyCooker=function(){
+            // 烹饪出菜品
+        }
+
+
+        function Custom(){
+
+        }
+        Custom.prototype.order=function(){
+            // 点菜
+        }
+        Custom.prototype.enjoy=function(){
+            // 吃
+        }
+
+
+        function Dishes(name,cost,price){
+            this.name=name
+            this.cost=cost
+            this.price=price
+        }
+
+        var ifeRestaurant = new Restaurant({
+            cash: 1000000,
+            seats: 20,
+            staff: []
+        });
+
+        var newCook = new Cooker('1',"Tony", 10000);
+        ifeRestaurant.hire(newCook);
+
+        console.log(ifeRestaurant.staff);
+
+        ifeRestaurant.fire(newCook);
+        console.log(ifeRestaurant.staff);
+    </script>
+</body>
+</html>
