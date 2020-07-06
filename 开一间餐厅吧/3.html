@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var menu=[
+        new Dishes('宫保鸡丁',10,25),
+        new Dishes('土豆排骨',8,15),
+        new Dishes('葱炒回锅肉',10,20),
+        new Dishes('菠萝咕咾肉',15,30),
+        new Dishes('锅包肉',12,26),
+        ]
+
+
+        function Restaurant(obj){
+            this.cash=obj.cash
+            this.sets=obj.sets
+            this.staff=obj.staff
+        }
+        Restaurant.prototype.hire=function(obj){
+            if(this.staff.indexOf(obj)===-1){
+                this.staff.push(obj)
+            }
+        }
+        Restaurant.prototype.fire=function(obj){
+            let index=this.staff.indexOf(obj)
+            if(index!==-1){
+                this.staff.splice(index,1)
+                // console.log(temp)
+                // this.staff=temp
+            }
+        };
+    
+
+        function Staff(name,salary){
+            this.id=new Date()
+            this.name=name
+            this.salary=salary
+        }
+        Staff.prototype.workDone=function(){
+            console.log('员工完成了一次工作')
+        }    
+    
+
+        function Waitress(name,salary){
+            Staff.call(this,name,salary)
+            // this.orders=[]
+        }
+        Waitress.prototype=Object.create(Staff.prototype)
+        Waitress.prototype.constructor=Waitress
+        Waitress.prototype.workDone=function(obj){
+            if(Array.isArray(obj)){
+                // this.orders=obj
+                console.log('厨师准备做菜')
+                while(obj.length!==0){
+                    let val=obj.shift()
+                    this.informCooker(val['name'])
+                }
+                // 将菜单告诉厨师准备做菜
+            }else{
+                // 上菜行为，顾客开始用餐
+                console.log(obj+'做好了，请用餐吧')
+                customer.eat(obj)
+            }
+        }
+        Waitress.prototype.informCooker=function(dishname){
+            var cooker=new Cooker('Bob',3000)
+            cooker.workDone(dishname)
+        }
+
+        Waitress.getSingleWaitress=(function(name,salary){
+            var instance=null
+            return function(name,salary){
+                if(instance==undefined){
+                    instance=new Waitress(name,salary)
+                }
+                return instance
+            }
+        })();
+
+
+
+        function Cooker(name,salary){
+            // console.log(name,salary)
+            Staff.call(this,name,salary)
+        }
+        Cooker.prototype=Object.create(Staff.prototype)
+        Cooker.constructor=Cooker
+        Cooker.prototype.workDone=function(name){
+            console.log(name+'做好了，上菜')
+            var waiter=Waitress.getSingleWaitress('Rose',1000)
+            waiter.workDone(name)
+        }
+        Cooker.getSingleCooker=function(){
+            var instance=null
+            return function(name,salary){
+                if(instance==undefined){
+                    instance=new Cooker(name,salary)
+                }
+                return instance
+            }
+        }
+
+
+        function Custom(){
+            this.id=new Date()
+            this.dishlist=[]
+        }
+        Custom.prototype.order=function(){
+            var dish=menu[Math.floor(Math.random()*5)]
+            this.dishlist.push(dish)
+            // 点菜
+            this.informWaitress()
+        }
+        Custom.prototype.informWaitress=function(){
+            console.log('顾客'+':'+this.id+'点完了，请上菜吧')
+            var waiter=Waitress.getSingleWaitress('Rose',1000)
+            waiter.workDone(this.dishlist)
+        }
+        Custom.prototype.eat=function(dishname){
+            // 吃
+            console.log(dishname+'好吃')
+        }
+
+
+        function Dishes(name,cost,price){
+            this.name=name
+            this.cost=cost
+            this.price=price
+        }
+
+
+        // var ifeRestaurant = new Restaurant({
+        //     cash: 1000000,
+        //     seats: 20,
+        //     staff: []
+        // });
+
+        // var newCook = new Cooker("Tony", 10000);
+        // ifeRestaurant.hire(newCook);
+
+        // console.log(ifeRestaurant.staff);
+        // console.log(ifeRestaurant.staff[0])
+
+        // ifeRestaurant.fire(newCook);
+        // console.log(ifeRestaurant.staff);
+
+        var customers=[new Custom(),new Custom(),new Custom()]
+        for(let i=0,len=customers.length;i<len;i++){
+            var customer=customers[i]
+            customer.order()
+        }
+        
+    </script>
+</body>
+</html>
